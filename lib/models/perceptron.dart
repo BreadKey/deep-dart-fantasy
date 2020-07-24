@@ -1,9 +1,16 @@
 num and(num x1, num x2) {
-  final w1 = 0.5;
-  final w2 = 0.5;
-  final theta = 0.7;
+  final x = [x1, x2];
+  final w = [0.5, 0.5];
+  final b = -0.7;
 
-  final tmp = x1 * w1 + x2 * w2;
+  final tmp = (x * w).sum + b;
 
-  return tmp <= theta ? 0 : 1;
+  return tmp <= 0 ? 0 : 1;
+}
+
+extension NumListOperation on List<num> {
+  num get sum => reduce((value, element) => value + element);
+
+  List<num> operator *(List<num> other) =>
+      List.generate(length, (index) => this[index] * other[index]);
 }
