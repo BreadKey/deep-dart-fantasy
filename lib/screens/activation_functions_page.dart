@@ -6,25 +6,32 @@ class ActivationFunctionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Activation Functions"),
-      ),
-      body: Row(
-        children: [
-          Expanded(
-            child: _buildActivationFunctionGraph(context, "Step", step),
-          ),
-          const VerticalDivider(),
-          Expanded(
-            child: _buildActivationFunctionGraph(context, "Sigmoid", sigmoid),
-          ),
-          const VerticalDivider(),
-          Expanded(
-            child: _buildActivationFunctionGraph(context, "ReLU", relu),
-          )
-        ],
-      ),
-    );
+        appBar: AppBar(
+          title: Text("Activation Functions"),
+        ),
+        body: OrientationBuilder(builder: (context, orientation) {
+          final divider = orientation == Orientation.landscape
+              ? const VerticalDivider()
+              : Divider();
+
+          final children = [
+            Expanded(
+              child: _buildActivationFunctionGraph(context, "Step", step),
+            ),
+            divider,
+            Expanded(
+              child: _buildActivationFunctionGraph(context, "Sigmoid", sigmoid),
+            ),
+            divider,
+            Expanded(
+              child: _buildActivationFunctionGraph(context, "ReLU", relu),
+            )
+          ];
+
+          return orientation == Orientation.landscape
+              ? Row(children: children)
+              : Column(children: children);
+        }));
   }
 
   Widget _buildActivationFunctionGraph(
