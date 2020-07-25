@@ -8,4 +8,11 @@ void main() {
     expect(and(1, 0), 0);
     expect(and(1, 1), 1);
   });
+
+  test("nand test", () {
+    expect(nand(0, 0), 1);
+    expect(nand(0, 1), 1);
+    expect(nand(1, 0), 1);
+    expect(nand(1, 1), 0);
+  });
 }
