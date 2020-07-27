@@ -5,7 +5,7 @@ extension NumListOperation on List<num> {
       List.generate(length, (index) => this[index] * other[index]);
 }
 
-extension MatrixOperation on List<List<num>> {
+extension Matrix on List<List<num>> {
   int get row => length;
   int get column => first.length;
 
