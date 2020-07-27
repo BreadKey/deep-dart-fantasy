@@ -3,6 +3,8 @@ extension NumListOperation on List<num> {
 
   List<num> operator *(List<num> other) =>
       List.generate(length, (index) => this[index] * other[index]);
+
+  List<num> dot(List<List<num>> otherMatrix) => ([this] * otherMatrix).first;
 }
 
 extension Matrix on List<List<num>> {

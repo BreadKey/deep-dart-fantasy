@@ -45,4 +45,14 @@ void main() {
       [49, 64]
     ]);
   });
+
+  test("1x2 matrix * 2x3 matrix", () {
+    final a = [1, 2];
+    final b = [
+      [1, 3, 5],
+      [2, 4, 6]
+    ];
+
+    expect(a.dot(b), [5, 11, 17]);
+  });
 }
