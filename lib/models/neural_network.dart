@@ -1,9 +1,24 @@
-import 'package:deep_dart_fantasy/models/activation_functions.dart';
+import 'dart:math';
+
 import 'package:deep_dart_fantasy/utils.dart';
 import 'package:flutter/widgets.dart';
 
+typedef List<num> Output(List<num> x);
+List<num> identify(List<num> x) => x;
+List<num> softmax(List<num> x) {
+  final c = x.max;
+
+  final expX = x.map((e) => exp(e - c)).toList();
+  final sumOfExpX = expX.sum;
+
+  return expX.map((e) => e / sumOfExpX).toList();
+}
+
 class NeuralNetwork {
   final _layers = <Layer>[];
+  Output output;
+
+  NeuralNetwork({this.output = identify});
 
   void addLayer(Layer layer) {
     if (_layers.isEmpty) {
@@ -23,11 +38,11 @@ class NeuralNetwork {
       y = y
           .dot(layer.w)
           .plus(layer.b)
-          .map((e) => layer.activationFunction(e))
+          .map((e) => layer.activationFunction?.call(e) ?? e)
           .toList();
     }
 
-    return y;
+    return output(y);
   }
 }
 
@@ -36,8 +51,7 @@ class Layer {
   final List<num> b;
   final num Function(num) activationFunction;
 
-  Layer(
-      {@required this.w, @required this.b, this.activationFunction = identify})
+  Layer({@required this.w, @required this.b, this.activationFunction})
       : assert(w != null && w.isNotEmpty),
         assert(b != null && b.isNotEmpty),
         assert(b.length == w.column);

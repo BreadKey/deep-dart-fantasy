@@ -2,14 +2,20 @@ extension NumUtls on num {
   num toFixed(int fractionDigits) => num.parse(toStringAsFixed(fractionDigits));
 }
 
+/// reduce function cause ERROR: type '(num, num) => num' is not a subtype of type '(double, double) => double' of 'combine'
 extension NumListOperation on List<num> {
-  num get sum => reduce((value, element) => value + element);
+  num get sum => fold(0, (previousValue, element) => previousValue + element);
 
   List<num> operator *(List<num> other) =>
       List.generate(length, (index) => this[index] * other[index]);
 
   List<num> plus(List<num> other) =>
       List.generate(length, (index) => this[index] + other[index]);
+
+  num get max => fold(
+      first,
+      (previousValue, element) =>
+          element > previousValue ? element : previousValue);
 }
 
 extension RowVector on List<num> {

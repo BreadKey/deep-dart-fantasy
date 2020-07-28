@@ -51,4 +51,12 @@ void main() {
 
     print(y);
   });
+
+  test("softmax test", () {
+    final x = [0.3, 2.9, 4.0];
+
+    final y = softmax(x);
+
+    expect(y.sum, 1.0);
+  });
 }
