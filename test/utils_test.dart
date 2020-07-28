@@ -1,3 +1,4 @@
+import 'package:deep_dart_fantasy/models/activation_functions.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:deep_dart_fantasy/utils.dart';
 
@@ -54,5 +55,43 @@ void main() {
     ];
 
     expect(a.dot(b), [5, 11, 17]);
+  });
+
+  test("neural network test", () {
+    final x = [1.0, 0.5];
+    final w1 = [
+      [0.1, 0.3, 0.5],
+      [0.2, 0.4, 0.6]
+    ];
+    final b1 = [0.1, 0.2, 0.3];
+
+    final a1 = x.dot(w1).plus(b1);
+
+    final z1 = a1.map((e) => sigmoid(e)).toList();
+
+    expect(z1.map((e) => e.toFixed(8)), [0.57444252, 0.66818777, 0.75026011]);
+
+    final w2 = [
+      [0.1, 0.4],
+      [0.2, 0.5],
+      [0.3, 0.6]
+    ];
+
+    final b2 = [0.1, 0.2];
+
+    final a2 = z1.dot(w2).plus(b2);
+    final z2 = a2.map((e) => sigmoid(e)).toList();
+
+    final w3 = [
+      [0.1, 0.1],
+      [0.2, 0.4]
+    ];
+
+    final b3 = [0.1, 0.2];
+
+    final a3 = z2.dot(w3).plus(b3);
+    final y = a3.map((e) => e).toList();
+
+    print(y);
   });
 }
