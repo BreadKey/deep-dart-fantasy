@@ -1,4 +1,4 @@
-import 'package:deep_dart_fantasy/utils.dart';
+import 'package:deep_dart_fantasy/utils/matrix.dart';
 
 num and(num x1, num x2) {
   final x = [x1, x2];

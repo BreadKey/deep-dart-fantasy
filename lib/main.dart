@@ -1,4 +1,5 @@
 import 'package:deep_dart_fantasy/screens/activation_functions_page.dart';
+import 'package:deep_dart_fantasy/screens/mnist_dataset_viewer.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: ActivationFunctionsPage(),
+      home: MnistDatasetViewer(),
     );
   }
 }

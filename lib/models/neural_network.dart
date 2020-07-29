@@ -1,14 +1,16 @@
 import 'dart:math';
 
-import 'package:deep_dart_fantasy/utils.dart';
+import 'package:deep_dart_fantasy/models/activation_functions.dart';
+import 'package:deep_dart_fantasy/utils/matrix.dart';
 import 'package:flutter/widgets.dart';
 
 typedef List<num> Output(List<num> x);
 List<num> identify(List<num> x) => x;
 List<num> softmax(List<num> x) {
-  final c = x.max;
+  final max = x.max;
 
-  final expX = x.map((e) => exp(e - c)).toList();
+  /// Prevent overflow error
+  final expX = x.map((e) => exp(e - max)).toList();
   final sumOfExpX = expX.sum;
 
   return expX.map((e) => e / sumOfExpX).toList();
@@ -49,7 +51,7 @@ class NeuralNetwork {
 class Layer {
   final List<List<num>> w;
   final List<num> b;
-  final num Function(num) activationFunction;
+  final ActivationFunction activationFunction;
 
   Layer({@required this.w, @required this.b, this.activationFunction})
       : assert(w != null && w.isNotEmpty),

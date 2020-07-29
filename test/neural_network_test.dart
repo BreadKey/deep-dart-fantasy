@@ -1,7 +1,7 @@
 import 'package:deep_dart_fantasy/models/activation_functions.dart';
 import 'package:deep_dart_fantasy/models/neural_network.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:deep_dart_fantasy/utils.dart';
+import 'package:deep_dart_fantasy/utils/matrix.dart';
 
 void main() {
   test("net test", () {
