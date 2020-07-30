@@ -1,4 +1,4 @@
-import 'package:deep_dart_fantasy/models/perceptron.dart';
+import 'package:deep_dart_fantasy/models/perceptrons.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
