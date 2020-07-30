@@ -26,18 +26,7 @@ class _MnistPredicatePageState extends State<MnistPredicatePage> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   _buildSelectMnistButton(context),
-                  RaisedButton(
-                    onPressed: _selectedData == null || _predicateResult != null
-                        ? null
-                        : () {
-                            setState(() {
-                              _predicateResult =
-                                  _predicator.predicate(_selectedData);
-                            });
-                          },
-                    child:
-                        Text(_predicateResult?.toString() ?? Strings.predicate),
-                  )
+                  _buildPredicateButton(context)
                 ],
               )
             ],
@@ -72,5 +61,18 @@ class _MnistPredicatePageState extends State<MnistPredicatePage> {
               ? Text(Strings.selectMnist)
               : MnistImage(_selectedData),
         ),
+      );
+
+  Widget _buildPredicateButton(BuildContext context) => RaisedButton(
+        disabledColor: _predicateResult != null ? Colors.transparent : null,
+        disabledTextColor: _predicateResult != null ? Colors.black : null,
+        onPressed: _selectedData == null || _predicateResult != null
+            ? null
+            : () {
+                setState(() {
+                  _predicateResult = _predicator.predicate(_selectedData);
+                });
+              },
+        child: Text(_predicateResult?.toString() ?? Strings.predicate),
       );
 }

@@ -1,5 +1,3 @@
-import 'package:deep_dart_fantasy/screens/activation_functions_page.dart';
-import 'package:deep_dart_fantasy/screens/mnist_dataset_viewer.dart';
 import 'package:deep_dart_fantasy/screens/mnist_predicate_page.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Deep Dart Fantasy',
       theme: ThemeData(
         // This is the theme of your application.
         //

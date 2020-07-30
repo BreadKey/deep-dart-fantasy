@@ -55,15 +55,15 @@ class _MnistImagePainter extends CustomPainter {
     final stride = size.width / 28;
     final space = stride / 2;
 
-    final paint = Paint()..strokeWidth = stride;
+    final paint = Paint()..strokeWidth = stride + 1;
 
     for (int row = 0; row < 28; row++) {
       for (int column = 0; column < 28; column++) {
-        final lightness = _data[row * 28 + column];
-        paint.color = Color.fromRGBO(lightness, lightness, lightness, 1);
+        final brightness = _data[row * 28 + column];
+        paint.color = Colors.black.withAlpha(brightness);
 
         canvas.drawLine(Offset(space + column * stride, row * stride),
-            Offset(space + column * stride, (row + 1) * stride), paint);
+            Offset(space + column * stride, (row + 1) * stride + 1), paint);
       }
     }
   }
