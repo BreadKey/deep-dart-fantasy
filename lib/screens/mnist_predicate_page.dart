@@ -1,6 +1,7 @@
 import 'package:deep_dart_fantasy/models/mnist_predicator.dart';
 import 'package:deep_dart_fantasy/models/strings.dart';
 import 'package:deep_dart_fantasy/screens/mnist_dataset_viewer.dart';
+import 'package:deep_dart_fantasy/utils/mnist.dart';
 import 'package:flutter/material.dart';
 
 class MnistPredicatePage extends StatefulWidget {
@@ -10,7 +11,7 @@ class MnistPredicatePage extends StatefulWidget {
 
 class _MnistPredicatePageState extends State<MnistPredicatePage> {
   final _predicator = MnistPredicator();
-  List<num> _selectedData;
+  MnistData _selectedData;
   int _predicateResult;
 
   @override
@@ -59,18 +60,22 @@ class _MnistPredicatePageState extends State<MnistPredicatePage> {
           },
           child: _selectedData == null
               ? Text(Strings.selectMnist)
-              : MnistImage(_selectedData),
+              : MnistImage(_selectedData.data),
         ),
       );
 
   Widget _buildPredicateButton(BuildContext context) => RaisedButton(
-        disabledColor: _predicateResult != null ? Colors.transparent : null,
-        disabledTextColor: _predicateResult != null ? Colors.black : null,
+        disabledColor: _predicateResult != null
+            ? _predicateResult == _selectedData.label
+                ? Colors.green
+                : Colors.red
+            : null,
+        disabledTextColor: _predicateResult != null ? Colors.white : null,
         onPressed: _selectedData == null || _predicateResult != null
             ? null
             : () {
                 setState(() {
-                  _predicateResult = _predicator.predicate(_selectedData);
+                  _predicateResult = _predicator.predicate(_selectedData.data);
                 });
               },
         child: Text(_predicateResult?.toString() ?? Strings.predicate),
