@@ -94,4 +94,35 @@ void main() {
 
     print(y);
   });
+
+  test("reshape test", () {
+    final rowVector = [1, 2, 3, 4];
+
+    expect(rowVector.reshape(2, 2), [
+      [1, 2],
+      [3, 4]
+    ]);
+  });
+
+  test("flatten test", () {
+    final matrix = [
+      [1, 2],
+      [3, 4]
+    ];
+
+    expect(matrix.flatten(), [1, 2, 3, 4]);
+  });
+
+  test("matrix reshape test", () {
+    final matrix = [
+      [1, 2, 3],
+      [4, 5, 6]
+    ];
+
+    expect(matrix.reshape(3, 2), [
+      [1, 2],
+      [3, 4],
+      [5, 6]
+    ]);
+  });
 }

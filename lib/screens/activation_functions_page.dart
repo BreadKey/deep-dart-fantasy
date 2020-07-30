@@ -24,7 +24,7 @@ class ActivationFunctionsPage extends StatelessWidget {
             ),
             divider,
             Expanded(
-              child: _buildActivationFunctionGraph(context, "ReLU", relu),
+              child: _buildActivationFunctionGraph(context, "ReLU", reLu),
             )
           ];
 

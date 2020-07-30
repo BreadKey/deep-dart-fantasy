@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 class Mnist {
@@ -16,16 +17,19 @@ class Mnist {
     if (_cache[_assetPath] == null) {
       final dataset = await rootBundle.load(_assetPath);
 
-      final dataCount = (dataset.lengthInBytes - _firstOffset) ~/ _dataSize;
-
-      _cache[_assetPath] = List.generate(
-          dataCount,
-          (dataIndex) => List.generate(
-              _dataSize,
-              (offset) => dataset
-                  .getUint8(_firstOffset + (dataIndex * _dataSize) + offset)));
+      _cache[_assetPath] = await compute(_parseDataset, dataset);
     }
 
     return _cache[_assetPath];
+  }
+
+  static List<List<num>> _parseDataset(ByteData dataset) {
+    final dataCount = (dataset.lengthInBytes - _firstOffset) ~/ _dataSize;
+    return List.generate(
+        dataCount,
+        (dataIndex) => List.generate(
+            _dataSize,
+            (offset) => dataset
+                .getUint8(_firstOffset + (dataIndex * _dataSize) + offset)));
   }
 }

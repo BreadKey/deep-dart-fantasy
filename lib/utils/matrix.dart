@@ -16,10 +16,29 @@ extension NumListOperation on List<num> {
       first,
       (previousValue, element) =>
           element > previousValue ? element : previousValue);
+
+  num get indexOfMax {
+    int indexOfMax = 0;
+
+    for (int index = 1; index < length; index++) {
+      indexOfMax = this[indexOfMax] > this[index] ? indexOfMax : index;
+    }
+
+    return indexOfMax;
+  }
 }
 
 extension RowVector on List<num> {
   List<num> dot(List<List<num>> otherMatrix) => ([this] * otherMatrix).first;
+
+  List<List<num>> reshape(int row, int column) {
+    assert(row * column == length);
+
+    return List.generate(row, (rowIndex) {
+      final start = rowIndex * column;
+      return sublist(start, start + column);
+    });
+  }
 }
 
 extension Matrix on List<List<num>> {
@@ -36,4 +55,10 @@ extension Matrix on List<List<num>> {
 
   List<num> columnVectorAt(int index) =>
       List.generate(row, (rowIndex) => this[rowIndex][index]);
+
+  List<num> flatten() =>
+      fold(<num>[], (previousValue, element) => previousValue + element);
+
+  List<List<num>> reshape(int row, int column) =>
+      flatten().reshape(row, column);
 }
