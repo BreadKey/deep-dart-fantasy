@@ -3,24 +3,24 @@ import 'package:flutter/material.dart';
 
 class MnistDatasetViewer extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => FutureBuilder<List<List<num>>>(
+  Widget build(BuildContext context) => FutureBuilder<List<MnistData>>(
       future: Mnist.test().load(),
       builder: (context, snapshot) {
         return snapshot.hasData
             ? ListView.builder(
                 itemBuilder: (context, index) => Row(
                       children: List.generate(3, (rowIndex) {
-                        final data = snapshot.data[index * 3 + rowIndex];
+                        final labeledData = snapshot.data[index * 3 + rowIndex];
 
                         return Expanded(
                             child: FlatButton(
                           padding: EdgeInsets.all(16),
                           onPressed: () {
-                            Navigator.of(context).pop(data);
+                            Navigator.of(context).pop(labeledData);
                           },
                           child: MnistImage(
-                            data,
-                            key: ValueKey(data),
+                            labeledData.data,
+                            key: ValueKey(labeledData),
                           ),
                         ));
                       }),
